@@ -1,0 +1,56 @@
+Tabela de Pacientes:
+
+CREATE TABLE pacientes (
+id INT PRIMARY KEY,
+nome VARCHAR(100),
+cpf VARCHAR(11),
+rg VARCHAR(15),
+telefone VARCHAR(15),
+email VARCHAR(100),
+endereco VARCHAR(200)
+);
+
+Tabela de Consultas:
+
+CREATE TABLE consultas (
+id INT PRIMARY KEY,
+data DATE,
+hora TIME,
+paciente_id INT,
+dentista_id INT,
+observacoes TEXT,
+FOREIGN KEY (paciente_id) REFERENCES pacientes(id),
+FOREIGN KEY (dentista_id) REFERENCES dentistas(id)
+);
+
+Tabela de Procedimentos:
+
+CREATE TABLE procedimentos (
+id INT PRIMARY KEY,
+nome VARCHAR(100),
+valor DECIMAL(10, 2)
+);
+
+Tabela de Dentistas:
+
+CREATE TABLE dentistas (
+id INT PRIMARY KEY,
+nome VARCHAR(100),
+cpf VARCHAR(11),
+rg VARCHAR(15),
+telefone VARCHAR(15),
+email VARCHAR(100),
+cro VARCHAR(10),
+especialidade VARCHAR(100),
+endereco VARCHAR(200)
+);
+
+Tabela de Consultas x Procedimentos (relacionamento many-to-many):
+
+CREATE TABLE consultas_procedimentos (
+consulta_id INT,
+procedimento_id INT,
+PRIMARY KEY (consulta_id, procedimento_id),
+FOREIGN KEY (consulta_id) REFERENCES consultas(id),
+FOREIGN KEY (procedimento_id) REFERENCES procedimentos(id)
+);
